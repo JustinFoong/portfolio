@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Circle Profile</title>
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+   <style>
+       @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
+
+       body {
+           font-family: 'Poppins', sans-serif;
+           background-image: url('asdf.png');
+           background-size: cover;
+           background-position: center;
+           color: #fff;
+           display: flex;
+           flex-direction: column;
+           justify-content: center;
+           align-items: center;
+           height: 100vh;
+           margin: 0;
+           overflow: hidden;
+       }
+
+       .profile-container {
+           position: relative;
+           width: 500px;
+           height: 500px;
+       }
+
+       .profile-carousel {
+           position: absolute;
+           top: 50%;
+           left: 50%;
+           transform: translate(-50%, -50%);
+           width: 500px;
+           height: 500px;
+           border-radius: 50%;
+           background-color: rgba(37, 37, 37, 0.8);
+           box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+           overflow: hidden;
+           display: flex;
+           justify-content: center;
+           align-items: center;
+       }
+
+       .profile-info {
+           position: absolute;
+           top: 50%;
+           left: 50%;
+           transform: translate(-50%, -50%);
+           text-align: center;
+           opacity: 0;
+           transition: opacity 0.5s ease;
+       }
+
+       .profile-info.active {
+           opacity: 1;
+       }
+
+       .profile-info h1, .profile-info h2, .profile-info p {
+           font-size: 20px;
+           line-height: 1.5;
+       }
+
+       .profile-links a {
+           display: inline-block;
+           margin: 0 10px;
+           color: #fff;
+           text-decoration: none;
+           transition: transform 0.3s ease;
+       }
+
+       .profile-links a:hover {
+           transform: scale(1.2);
+       }
+
+       .arrow {
+           position: absolute;
+           top: 50%;
+           transform: translateY(-50%);
+           font-size: 24px;
+           color: #fff;
+           cursor: pointer;
+           z-index: 3;
+       }
+
+       .arrow.prev {
+           left: 20px;
+       }
+
+       .arrow.next {
+           right: 20px;
+       }
+
+       .buttons {
+           display: flex;
+           justify-content: center;
+           margin-top: 20px;
+       }
+
+       .buttons button {
+           margin: 0 10px;
+           padding: 15px 30px;
+           background-color: #7e57c2;
+           color: #fff;
+           border: none;
+           border-radius: 30px;
+           font-size: 16px;
+           font-weight: 600;
+           cursor: pointer;
+           transition: background-color 0.3s ease, transform 0.3s ease;
+           box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+       }
+
+       .buttons button:hover {
+           background-color: #5e35b1;
+           transform: translateY(-3px);
+       }
+   </style>
+</head>
+<body>
+   <div class="profile-container">
+       <div class="profile-carousel">
+           <div class="profile-info active">
+               <h1>some info about me :)</h1>
+               <p>name: Justin Foong</p>
+               <p>age: 20</p>
+               <p>degree: I'm starting my first year bachelors in computer science this term!</p>
+               <p>where i'm from: Malaysia</p>
+           </div>
+           <div class="profile-info">
+               <h2>About My Coding</h2>
+               <p>I started coding at the age of 14, but quickly fell out of it and only recently picked it up again nearing the end of high school. I'm primarily a python coder, and love coding twitter and discord bots, although I do code in other languages like html, css, javascript and php as well!</p>
+           </div>
+           <div class="profile-info">
+               <h2>some MORE info about me :0</h2>
+               <p>I love cooking, playing video games and coding in my free time. I've recently been addicted to a roblox game which has taken up most of my time these days 😵</p>
+           </div>
+       </div>
+       <div class="arrow prev" onclick="prevSection()">&#8249;</div>
+       <div class="arrow next" onclick="nextSection()">&#8250;</div>
+   </div>
+
+   <div class="buttons">
+       <button id="discordbutton" onclick="copyDiscord()">Discord</button>
+       <a href="https://github.com/JustinFoong" target="_blank"><button>GitHub</button></a>
+       <a href="http://linktr.ee/kerdoosh" target="_blank"><button>Linktree</button></a>
+   </div>
+
+   <script>
+       const infoSections = document.querySelectorAll('.profile-info');
+       let currentSection = 0;
+
+       function showSection(index) {
+           infoSections.forEach((section, i) => {
+               section.classList.toggle('active', i === index);
+           });
+       }
+
+       function prevSection() {
+           currentSection = (currentSection - 1 + infoSections.length) % infoSections.length;
+           showSection(currentSection);
+       }
+
+       function nextSection() {
+           currentSection = (currentSection + 1) % infoSections.length;
+           showSection(currentSection);
+       }
+
+       showSection(currentSection);
+
+       function copyDiscord() {
+           const discordbutton = document.getElementById('discordbutton');
+           navigator.clipboard.writeText('crown._')
+               .then(() => {
+                discordbutton.textContent = 'Username copied';
+                   setTimeout(() => {
+                    discordbutton.textContent = 'Discord';
+                   }, 2000);
+               })
+               .catch((error) => {
+                   console.error('Failed to copy text: ', error);
+               });
+       }
+   </script>
+</body>
+</html>
